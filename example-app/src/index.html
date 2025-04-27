@@ -2,23 +2,152 @@
 <html lang="en" dir="ltr" class="hydrated">
   <head>
     <meta charset="UTF-8" />
-    <title>Example Capacitor App</title>
+    <title>Secure Storage Example</title>
     <meta
       name="viewport"
       content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <meta name="format-detection" content="telephone=no" />
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+      }
+      main {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      h1 {
+        color: #3880ff;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+      }
+      .card {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+      .button-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 15px;
+      }
+      button {
+        background: #3880ff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #4d8dff;
+      }
+      button.secondary {
+        background: #5260ff;
+      }
+      button.danger {
+        background: #eb445a;
+      }
+      .output {
+        background: #f8f8f8;
+        border-left: 4px solid #3880ff;
+        padding: 15px;
+        margin-top: 20px;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+        font-family: monospace;
+      }
+      #storedKeys {
+        list-style: none;
+        padding: 0;
+      }
+      #storedKeys li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+      }
+      #storedKeys li:last-child {
+        border-bottom: none;
+      }
+      .key-actions {
+        display: flex;
+        gap: 5px;
+      }
+      .key-actions button {
+        padding: 5px 10px;
+        font-size: 14px;
+      }
+    </style>
   </head>
   <body>
     <main>
-      <h1>Capacitor Test Plugin Project</h1>
-      <p>
-        This project can be used to test out the functionality of your plugin. Nothing in the
-        <em>example-app/</em> folder will be published to npm when using this template, so you can create away!
-      </p>
-      <label for="echoInput">Echo Text:</label>
-      <input type="text" id="echoInput" name="echoInput" value="Hello World!" />
-      <button onclick="testEcho()">Click Me!</button>
+      <h1>Capacitor Secure Storage Demo</h1>
+      
+      <div class="card">
+        <h2>Store Secure Data</h2>
+        <div class="form-group">
+          <label for="storeKey">Key:</label>
+          <input type="text" id="storeKey" name="storeKey" placeholder="Enter key name" />
+        </div>
+        <div class="form-group">
+          <label for="storeValue">Value:</label>
+          <input type="text" id="storeValue" name="storeValue" placeholder="Enter value to store securely" />
+        </div>
+        <div class="button-row">
+          <button onclick="storeSecureData()">Store Value</button>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h2>Retrieve Secure Data</h2>
+        <div class="form-group">
+          <label for="retrieveKey">Key:</label>
+          <input type="text" id="retrieveKey" name="retrieveKey" placeholder="Enter key to retrieve" />
+        </div>
+        <div class="button-row">
+          <button onclick="retrieveSecureData()">Get Value</button>
+        </div>
+        <div id="retrieveOutput" class="output" style="display: none;"></div>
+      </div>
+      
+      <div class="card">
+        <h2>All Stored Keys</h2>
+        <div class="button-row">
+          <button onclick="listAllKeys()">Refresh Key List</button>
+          <button class="danger" onclick="clearAllData()">Clear All Data</button>
+        </div>
+        <ul id="storedKeys"></ul>
+      </div>
+      
+      <div class="card">
+        <h2>Status</h2>
+        <div id="statusOutput" class="output">App initialized. Ready to use secure storage.</div>
+      </div>
     </main>
 
     <script src="./js/example.js" type="module"></script>
