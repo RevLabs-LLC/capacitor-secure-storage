@@ -1,5 +1,5 @@
 {
-  "name": "capacitor-secure-storage",
+  "name": "@revlabs/capacitor-secure-storage",
   "version": "0.0.1",
   "description": "thin wrapper around Android Keystore and iOS Keychain",
   "main": "dist/plugin.cjs.js",
