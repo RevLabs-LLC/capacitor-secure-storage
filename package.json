@@ -6,10 +6,17 @@
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
   "unpkg": "dist/plugin.js",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./src/index.ts"
+    }
+  },
   "files": [
     "android/src/main/",
     "android/build.gradle",
     "dist/",
+    "src/",
     "ios/Sources",
     "ios/Tests",
     "Package.swift",
